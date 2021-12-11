@@ -1,71 +1,69 @@
-# def median_mode_mean(list):
-# list = [5,3,6,7,8,3]
-# list = [1,2,3,4,6,7]
-
-def median(list): #calculating median
-  length = 0
-  for i in list:
-    length += 1
-  if length % 2 != 0:
-    position = int((length + 1) / 2) 
-    median = list[position - 1]
-    print(median)
-  else:
-    stepOne = int(length / 2)
-    stepTwo = list[stepOne - 1] + list[stepOne]
-    median = stepTwo / 2
-    print(f"median is : {median}")
-# median([77])
-
-def mean(list):
-  numSum = 0
-  length = 0
-  for i in list:
-    numSum = numSum + i
-    length += 1
-    average = numSum / length
-  print(f"average is : {average}")
-
-# mean([77])
+lst = [3, 4, 3,111,112,212, 12, 6, 7, 2]
 
 
-def mode(list):
-  length = 0
-  count = 0
-  newArray = []
+def lengthList(lst):
+    length = 0
+    for i in lst:
+        length += 1
+    return length
 
-  
-  for i in list:
-    length += 1
-    
-  if list != []:
-    for i in range(length):
-      a = list[i]
-      index = i
-      # print(a, index)
-      for time in list:
-        if time == a:
-          count += 1
-      newArray.append(count)
-      count = 0
-    DetectedElement = max(newArray)
-  
-    postion = newArray.index(DetectedElement)
-    mode = list[postion]
-    print(f"mode is : {mode}")
+# print(f"length : {lengthList(lst)}")
 
-      
-  else:
-    print("please don't insert empty list. I may crash 😠")
+def MaxList(lst):
+    biggestValue = lst[0]
+    for currentValue in lst:
+        if currentValue >= biggestValue:
+            biggestValue = currentValue
+    return biggestValue
 
-# mode([3,3,1,4,5,2])
+# print(f"biggestValue : {MaxList(lst)}")
 
+def median(lst): 
+    length = lengthList(lst)
+    if length % 2 != 0:
+        position = int((length + 1) / 2) 
+        median = lst[position - 1]
+    else:
+        stepOne = int(length / 2)
+        stepTwo = lst[stepOne - 1] + lst[stepOne]
+        median = stepTwo / 2
+    return median
 
+# print(f"median : {median(lst)}")
 
-def median_mode_mean(list):
-  median(list)
-  mode(list)
-  mean(list)
+def mean(lst):
+    numSum = 0
+    length = lengthList(lst)
+    for i in lst:
+        numSum = numSum + i
+        mean = numSum / length
+    return mean
 
+# print(f"mean : {mean(lst)} ")
 
-median_mode_mean([3,3,1,4,5,2])
+def mode(lst):
+    count = 0
+    newList = []
+    length = lengthList(lst)
+    for index in range(length):
+        a = lst[index]
+        for number in lst:
+            if number == a:
+                count += 1
+        newList.append(count)
+        count = 0
+    detectedElement = MaxList(newList)
+    position = newList.index(detectedElement)
+    mode = lst[position]
+    return mode
+
+# print(f"Mode : {mode(lst)} ")
+
+def median_mode_mean(lst):
+    if not lst:
+        print("you inserted empty list")
+    else:
+        print(f"median : {median(lst)}, mean : {mean(lst)}, Mode : {mode(lst)} ")
+
+median_mode_mean(lst)
+
